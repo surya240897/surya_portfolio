@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surya Bhan Pratap Singh — AI Product Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Instrument Serif"', "Georgia", "serif"],
+              sans: ['"Inter"', "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      html, body { margin: 0; padding: 0; }
+      body { font-family: "Inter", system-ui, sans-serif; background: #09090b; }
+      #loading {
+        position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+        color: #71717a; font-family: "Inter", system-ui, sans-serif; font-size: 14px;
+        background: #09090b; z-index: 999;
+      }
+      .spinner {
+        width: 24px; height: 24px; border: 2px solid #27272a; border-top-color: #a1a1aa;
+        border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 12px;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="loading"><div class="spinner"></div>Compiling portfolio…</div>
+    <div id="root"></div>
+    <script type="text/babel" data-presets="typescript,react" data-type="module" src="app.tsx"></script>
+    <script>
+      // Hide loader once root has content
+      const obs = new MutationObserver(() => {
+        const root = document.getElementById("root");
+        if (root && root.childNodes.length > 0) {
+          document.getElementById("loading").style.display = "none";
+          obs.disconnect();
+        }
+      });
+      obs.observe(document.getElementById("root"), { childList: true, subtree: true });
+    </script>
+  </body>
+</html>
